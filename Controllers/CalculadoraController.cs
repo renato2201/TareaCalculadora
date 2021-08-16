@@ -5,23 +5,22 @@ namespace TareaCalculadora.Controllers
 {
     public class CalculadoraController : Controller
     {
-        public class CalculadoraCOntroller : Controller
+
+        public IActionResult Index()
         {
-            public IActionResult Index()
-            {
-                return View();
-            }
+            return View();
+        }
 
-            [HttpPost]
-            public IActionResult Calcular(Calculadora objCalculadora)
-            {
-                decimal subtotal = objCalculadora.Precio*objCalculadora.Cantidad;
-                decimal total = subtotal* (decimal)1.18;
+        [HttpPost]
+        public IActionResult Calcular(Calculadora objCalculadora)
+        {
+            decimal subtotal = objCalculadora.Precio * objCalculadora.Cantidad;
+            decimal total = subtotal * (decimal)1.18;
 
-                ViewData["Message"] = "El costo sería : "+ total;                
+            ViewData["Message"] = "El costo sin IGV : " + subtotal;
+            ViewData["Message2"] = "El costo con IGV : "+total;
 
-                return View("Index");
-            }
+            return View("Index");
         }
     }
 }
